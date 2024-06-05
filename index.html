@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keyswords" content="云南">
+        <meta name="description" content="云南">
+        <meta name="author" content="zhp">
+  <title>云南首页</title>
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    /*
+    导航栏
+    */
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  .container {
+    min-width: 1200px;
+  }
+  .flex {
+    display: flex;
+  }
+  .full-height {
+    height: 100%;
+  }
+  header {
+    background: #24292D;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0 25px;
+  }
+  header > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .logo-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-block:hover {
+    transform: scale(1.1);
+  }
+  .logo {
+    width: 40px;
+    height: 38px;
+    margin-right: 30px;
+  }
+  .menu-item {
+    color: #ffffff;
+    font-size: 16px;
+    width: 64px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    position: relative;
+    cursor: pointer;
+}
+  .a1 {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  .hot {
+    position: absolute;
+    top: 10px;
+    right: -22px;
+  }
+    .search-box {
+        position: relative;
+    }
+    .search-box input[type="text"] {
+        padding: 5px 30px 5px 10px; /* 调整输入框内边距，使得搜索图标不会重叠 */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .search-box button {
+        position: absolute;
+        right: 5px; /* 调整搜索按钮的位置 */
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .search-box button img {
+        width: 20px; /* 设置图标的宽度 */
+        height: 20px; /* 设置图标的高度 */
+    }
+  .userphoto {
+    width: 34px;
+    height: 34px;
+    margin-left: 15px;
+    cursor: pointer;
+  }
+  .userphoto:hover {
+    transform: scale(1.1);
+  }
+  .menu-item:hover {
+    opacity: .7;
+  }
+  .active {
+    position: relative;
+    color: #459be5;
+  }
+  .active:after {
+    position: absolute;
+    content: ' ';
+    width: 14px;
+    height: 2px;
+    background: #459be5;
+    bottom: -10px;
+    left: 0;
+  }
+  /*
+    导航栏
+    */
+
+/*------轮播图效果（start）------*/
+            .box {
+                width: 1400px;
+                height: 320px;/*！可修改*/
+                position: relative;
+                margin: 0 auto;/*轮播图水平居中*/
+            }
+            .box-img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;/*透明设置，设置为完全透明*/
+                transition: all 1.5s;/*实现平滑过渡，有淡入淡出的效果*/
+            }
+            .box-img:nth-child(1) {/*选择父元素的第一个子元素*/
+                opacity: 1;/*第一张图片设置为完全不透明*/
+            }
+            .box-left {
+                position: absolute;
+                width: 35px;
+                height: 70px;
+                background-color:#00000065;
+                color: #ccc;
+                top: 125px;/*！可修改*/
+                border-radius: 0 5px 5px 0;
+                text-align: center;
+                line-height: 70px;
+                font-size: 30px;
+            }
+            .box-left:hover {
+                background-color: #00000075;
+                color: #fff;
+                padding: 1px;
+            }
+            .box-right {
+                position: absolute;
+                right: 0;
+                width: 35px;
+                height: 70px; 
+                background-color:#00000065;
+                color: #ccc;
+                top: 125px;/*！可修改*/
+                border-radius: 5px 0 0 5px;
+                text-align: center;
+                line-height: 70px;
+                font-size: 30px;
+            }
+            .box-right:hover {
+                background-color: #00000075;
+                color: #fff;
+                padding: 1px;
+            }
+            .box-xiaoyuandian {
+                position: absolute;
+                bottom: 30px;
+                right: 100px;
+            }
+            .box-xiaoyuandian>ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;/*用于列表元素<ul>,<li>,<ol>,移除了列表项的默认标记(例如，圆点或数字)*/
+            }
+            .box-xiaoyuandian li {
+                width: 14px;
+                height: 14px;
+                background-color: #ccc;
+                border-radius: 100%;
+                float: left;
+                margin-left: 10px;
+            }
+            .box-xiaoyuandian li:hover {
+                background-color: #fff;
+            }
+            .box-xiaoyuandian li:nth-child(1) {
+                background-color: #fff;
+            }
+/*------轮播图效果（end）------*/
+/*
+  介绍图
+*/			
+.diary-block {
+  width: 80%;
+  height: 450px;
+  padding: 0 40px;
+  margin: 25px auto;
+  display: flex; /* 使用Flexbox */
+  justify-content: space-between; /* 在项之间添加空间 */
+  flex-wrap: wrap; /* 允许换行 */
+  align-items: stretch; /* 使所有项的高度拉伸到与最高项相同 */
+}
+
+.diary-item {
+  width: 30%; /* 根据需要调整宽度 */
+  margin-bottom: 50px; /* 添加底部外边距 */
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px #ccc, -10px 10px 20px #ccc;
+}
+
+.diary-item .diary-img {
+  overflow: hidden;
+}
+
+.diary-item .diary-img img {
+  width: 100%;
+  height: 232px;
+  transition: all .3s ease-in;
+}
+
+.diary-item .diary-img img:hover {
+  transform-origin: center;
+  transform: scale(1.1);
+}
+
+.diary-item .diary-details {
+  height: 180px; /* 根据需要调整高度 */
+  padding: 10px 30px;
+  color: #888;
+}
+
+.diary-item .diary-details p {
+  line-height: 26px;
+}
+.diary-item .diary-details a {
+  text-decoration: none;
+  color: #888;
+}
+
+.diary-item .diary-details .diary-describe {
+  height: 72px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  margin-top: 10px;
+}
+.p1 {
+  font-weight: bold;
+  color: black;
+}
+.h2 {
+    position: relative;
+    color: black;
+    letter-spacing: 1em;
+    height: 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1));
+    animation: slider-animation 10s linear infinite;
+  }
+
+  .slider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.1));
+    animation: slider-animation 10s linear infinite reverse;
+  }
+
+  @keyframes slider-animation {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+/*
+  介绍图
+*/
+
+</style>
+<body>
+<!--导航栏-->
+<div class="container">
+  <header class="flex">
+    <div class="left-wrap">
+      <div class="logo-block">
+        <a href="#" target="_blank"><img src="images/云南.png" class="logo"></a>
+      </div>
+      <div class="menu-block full-height flex">
+        <div class="menu-item"><span class="active"><a href="#" class="a1" target="_blank">首页</a></span></div>
+        <div class="menu-item"><span><a href="智慧地图.html" target="_blank" class="a1">智慧地图</a></span></div>
+        <div class="menu-item"><span><a href="旅行路线.html" id="travelRouteLink" class="a1">旅行路线</a></span></div>
+        <div class="menu-item"><span><a href="https://news.qq.com/" target="_blank" class="a1">新闻资讯</a></span></div>
+        <div class="menu-item"><span><a href="人文美食.html" target="_blank" class="a1">人文美食</a><img class="hot" src="images/hot.png"></span></div>
+        <div class="menu-item"><span><a href="热门景点.html" target="_blank" class="a1">热门景点</a><img class="hot" src="images/hot.png"></span></div>
+        <div class="menu-item"><span><a href="摄影展示.html" target="_blank" class="a1" onclick="playMusic()">摄影展示</a><img class="hot" src="images/hot.png"></span></div>
+        <div class="menu-item"><span><a href="个人中心.html" target="_blank" class="a1">个人中心</a></span></div>
+      </div>
+    </div>
+    <div class="right-wrap">
+        <div class="search-box">
+            <button type="submit" id="searchButton"><img src="images/搜索图标.png" alt=""></button>
+            <input type="text" placeholder="云南有啥好玩的地方？" id="searchInput" onkeydown="searchOnEnter(event)">
+        </div>
+      <a href="#" target="_blank"><img class="userphoto" src="images/云南省.png" alt=""></a>
+    </div>
+  </header>
+</div>
+ <!--轮播图-->
+ <div class="box">
+    <div class="box-img"><img src="images/1.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/2.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/3.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/4.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/5.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/6.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/7.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/8.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/9.png" alt="" width="1400" height="320"></div>
+    <div class="box-img"><img src="images/10.png" alt="" width="1400" height="320"></div>
+    <!--这里可以添加图片-->
+    <div class="box-left">&lt;</div> <!-- 向左箭头 -->
+    <div class="box-right">&gt;</div> <!-- 向右箭头 -->
+    <div class="box-xiaoyuandian">
+        <ul>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <li class="button"></li>
+            <!--这里可以添加小圆点-->
+        </ul>
+    </div>
+</div>
+<div class="h2">
+  <h2 style="text-align: center;">山高水远 风情万种 云卷云舒 七彩云南</h2>
+  <div class="slider"></div>
+</div>
+<!--介绍图-->
+<div class="diary-block">
+  <div class="diary-item clearfix">
+    <div class="diary-img">
+      <img src="images/y1.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">昆明西山与滇池</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E6%98%86%E6%98%8E%E5%B8%82/406229?fr=ge_ala" target="_blank">西山与滇池共同构成了昆明最美丽的风景线，它们相互映衬，形成了一幅幅如诗如画的自然画卷。游客可以在这里欣赏到山水相依的壮丽景色，体验云南丰富的历史文化和自然生态。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y2.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">楚雄彝人古镇</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E5%BD%9D%E4%BA%BA%E5%8F%A4%E9%95%87/4357066?fr=ge_ala" target="_blank">彝人古镇不仅是一个展示彝族文化和艺术的平台，还是一座活生生的民族文化博物馆。在这里，游客可以感受到历史与现代的交融、文化与自然的和谐共存。古镇的建筑、文化和活动都充分展现了彝族的历史、文化和生活方式，使其成为了解和体验彝族文化的绝佳地点。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y3.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">大理苍山与洱海</p>
+      <p class="diary-describe">
+       <a href="https://baike.baidu.com/item/%E6%B4%B1%E6%B5%B7/518231?fr=ge_ala" target="_blank">苍山洱海国家级自然保护区于1993年升级为国家级自然保护区，总面积达79700公顷。该保护区旨在保护古冰川遗迹、高原湖泊自然景观、特有鱼类和名胜古迹等。苍山洱海不仅是自然生态系统的保护区域，还包含丰富的自然遗迹，是一个多层次、多功能、大容量的综合型自然保护区。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y4.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">大理古城</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E5%A4%A7%E7%90%86%E5%8F%A4%E5%9F%8E/1874828?fr=ge_ala" target="_blank">大理古城，位于中国云南省西部，是一座历史悠久的城市。它的历史可以追溯到唐代，当时是南诏国的都城。现在的大理古城是在明朝洪武十五年（1382年）重建的，占地面积约3平方公里。这座古城在唐宋时期是云南的政治、经济和文化中心，现在则是一个重要的旅游目的地。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y5.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">丽江古城</p>
+      <p class="diary-describe">
+       <a href="https://baike.baidu.com/item/%E4%B8%BD%E6%B1%9F%E5%8F%A4%E5%9F%8E/304665?fr=ge_ala" target="_blank">丽江古城，位于中国云南省丽江市古城区，也称为大研镇，是一座拥有悠久历史和独特文化的古城。它始建于宋末元初（13世纪后期），占地面积约7.279平方公里。丽江古城地处云贵高原，其气候受到南亚高原风的影响，具有明显的垂直气候分布特征，干湿季分明。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y6.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">玉龙雪山</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E7%8E%89%E9%BE%99%E9%9B%AA%E5%B1%B1/454679?fr=ge_ala" target="_blank">玉龙雪山，位于中国云南省丽江市境内，是北半球最近赤道终年积雪的山脉之一。它由13座雪峰组成，主峰扇子陡海拔高达5596米，终年积雪，雪线高度介于4800至5000米之间。玉龙雪山以其壮丽的自然景观和丰富的生物多样性而闻名，是国家级风景名胜区和5A级旅游景区。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y7.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">束河古镇</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E6%9D%9F%E6%B2%B3%E5%8F%A4%E9%95%87/1529871" target="_blank">束河古镇，位于云南省丽江市，是世界文化遗产丽江古城的重要组成部分。这个古镇已有千年历史，总面积约5平方千米，建筑面积约40万平方米，绿化面积高达60%。束河古镇以其保存完好的古道、集市和传统民居而闻名，其中民居近千幢，主要居民为纳西族。这里曾是茶马古道上的重镇和纳西文化交流中心，也是纳西族从农耕文明向商业文明过渡的重要标志。古镇内还拥有明代壁画、大觉宫、三圣宫等珍贵文物和建筑。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y8.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">泸沽湖</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E6%B3%B8%E6%B2%BD%E6%B9%96/396555?fr=ge_ala" target="_blank">泸沽湖位于中国四川省凉山彝族自治州盐源县和云南省丽江市宁蒗彝族自治县交界处，是一个高原断层溶蚀陷落湖泊，属于长江上游干流金沙江支流雅砻江支流理塘河水系。泸沽湖的湖面海拔约为2690米，湖泊面积达到50.1平方公里，是中国第三大深水湖泊。</a>
+      </p>
+    </div>
+  </div>
+  <div class="diary-item">
+    <div class="diary-img">
+      <img src="images/y9.png" alt="" />
+    </div>
+    <div class="diary-details">
+      <p class="p1">西双版纳</p>
+      <p class="diary-describe">
+        <a href="https://baike.baidu.com/item/%E8%A5%BF%E5%8F%8C%E7%89%88%E7%BA%B3%E5%82%A3%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E/5622791?fr=ge_ala" target="_blank">西双版纳是中国热带生态系统保存最完整的地区，被誉为“植物王国”、“动物王国”、“生物基因库”，拥有中国唯一的热带雨林自然保护区。此外，西双版纳还是中国第二大天然橡胶生产基地，大叶种茶的原生地，以及普洱茶的故乡。该地区建有1个5A级景区和9个4A级景区，以热带雨林自然景观和少数民族风情而闻名于世，是中国热点旅游城市之一。</a>
+      </p>
+    </div>
+  </div>
+</div>
+  <!--轮播图-->
+  <!--引入jquery库，不然无法运行！-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript">
+      $(function(){
+          var index=0;//标记当前图片索引
+          var f;
+          dingshiqi();//调用函数
+          function dingshiqi(){//写一个计时器函数，关闭和重启
+              f=setInterval(function(){
+              if(index==$(".box-img").length-1){
+                  index=0;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+              }else{
+                  index++;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+              }
+          },4000)
+          }
+          //鼠标点击事件
+          $(".box-left").click(function(){
+              clearInterval(f);/*暂停轮播*/
+              /*alert(1);网页上会弹出一个警告框，显示为1，事件可以运行*/
+              if(index==0){
+                  index=$(".box-img").length-1;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+                  dingshiqi();//重启
+              }else{
+                  index--;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+                  dingshiqi();//重启
+              }
+          })
+          $(".box-right").click(function(){
+              clearInterval(f);
+              if(index==$(".box-img").length-1){
+                  index=0;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+                  dingshiqi();//重启
+              }else{
+                  index++;
+                  $(".box-img").css("opacity","0");
+                  $(".box-img").eq(index).css("opacity","1");
+                  $(".button").css("background-color","#ccc");
+                  $(".button").eq(index).css("background-color","#fff");
+                  dingshiqi();//重启
+              }
+          })
+          //鼠标移动事件
+          $(".button").mouseenter(function(){
+              clearInterval(f);
+              var indexx=$(this).index();/*alert(indexx);测试*/
+              index=indexx;
+              $(".box-img").css("opacity","0");
+              $(".box-img").eq(index).css("opacity","1");
+              $(".button").css("background-color","#ccc");
+              $(".button").eq(index).css("background-color","#fff");
+              dingshiqi();
+          })
+      })
+  </script>
+<!--搜索-->
+<script>
+    // 当你确定DOM已经加载完毕时（通常是在文档末尾或window.onload事件中）  
+    document.getElementById('searchButton').addEventListener('click', function(event) {  
+    event.preventDefault(); // 阻止表单的默认提交行为（如果这是在一个表单中）  
+      
+    // 这里是你的点击事件处理代码  
+    alert('搜索功能暂未完善，敬请期待！');  
+});  
+    function searchButtonClicked() {  
+        // 搜索按钮被点击时执行的代码  
+        var searchInput = document.getElementById('searchInput');  
+        var searchTerm = searchInput.value;  
+        console.log('搜索按钮被点击，搜索词：', searchTerm);  
+        // ... 执行搜索逻辑 ...  
+    }  
+    
+    function searchOnEnter(event) {  
+        // 检测回车键（键码为13）  
+        if (event.key === 'Enter' || event.keyCode === 13) {   
+            // 阻止表单默认的提交行为（如果有的话）  
+            event.preventDefault();  
+            // 调用与搜索按钮相同的函数  
+            searchButtonClicked();  
+            alert('搜索功能暂未完善，敬请期待！');
+        }  
+    }
+    function showAlert() {  
+    alert('该功能正在完善中，敬请期待！');  
+    return false; // 阻止链接的默认行为  
+}    
+    </script>
+<!---->
+<script>
+  function playMusic() {
+    // 创建一个临时的 audio 元素来触发音乐播放
+    var audio = new Audio('音乐.mp3');
+
+    // 检查是否已经播放过音乐
+    if (!playMusic.played) {
+        audio.play();
+        // 设置标志表示音乐已经开始播放
+        playMusic.played = true;
+    }
+}
+
+// 初始时，音乐尚未播放
+playMusic.played = false;
+  </script>
+  <script>
+    // 获取链接元素并绑定点击事件
+    document.getElementById('travelRouteLink').addEventListener('click', function(event) {
+      // 阻止链接的默认行为（跳转）
+      event.preventDefault();
+  
+      // 显示弹框
+      alert('改功能尚未完善，敬请期待！');
+    });
+  </script>
+</body>
+</html>
