@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人中心</title>
+<style>
+    body {
+       background-color: azure;
+    }
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* 垂直居中 */
+        justify-content: space-around; /* 水平分布 */
+        height: 100vh; /* 使用视口高度 */
+        background-image: url(images/bg.png);
+        background-size: contain; /* 背景图像不裁剪 */
+        background-repeat: no-repeat; /* 不重复背景图像 */
+        background-position: center center; /* 将背景图像居中 */
+    }
+    .box {
+        width: 100px; /* 盒子宽度 */
+        height: 100px; /* 盒子高度 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .red { background-color: red; }
+    .green { background-color: green; }
+    .blue { background-color: blue; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="注册.html" class="box red" target="_blank">注册</a>
+    <a href="登录.html" class="box green" target="_blank">登录</a>
+    <a href="用户反馈.html" class="box blue" target="_blank">用户反馈</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>用户反馈</title>  
+<style>
+
+    body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 20px;
+    background-image: url(images/用户反馈.png);
+    background-size: cover;  
+}  
+  
+.feedback-container {  
+    max-width: 600px;  
+    margin: 0 auto;  
+    padding: 20px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background-color: rgb(223, 216, 216);  
+}  
+  
+h2 {  
+    text-align: center;  
+}
+
+p {
+    text-align: center;
+}
+  
+label {  
+    display: block;  
+    margin-bottom: 5px;  
+}  
+  
+textarea {
+    width: 80%;   
+    /*resize: vertical;允许用户垂直调整<textarea>元素的大小*/
+    resize: none;/*不要让用户改变文本框的大小*/
+}
+
+#feedbackForm div {
+    padding: 8px;
+}
+ 
+#feedbackMessage {  
+    margin-top: 10px;  
+    padding: 5px;  
+    border-radius: 5px;  
+    background-color: #2a2727;  
+}
+
+input:out-of-range {
+    border: 2px solid red;
+}
+
+#time {
+    margin-right: 10px;
+}
+
+
+/*JavaScript*/  
+.success {  
+    color: green;  
+}  
+  
+.error {  
+    color: red;  
+}
+</style>  
+</head>  
+<body>  
+  
+<div class="feedback-container">  
+    <h2>用户反馈</h2>
+    <p><i>我们将严格保护您的个人信息！</i></p>  
+    <form id="feedbackForm">
+        <div>
+            <label for="username">用户名：
+                <input type="text" name="username" autofocus required>
+            </label>
+        </div>
+        <div>
+            <label>性别：
+                <select name="sex">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label for="age">年龄：
+                <input type="number" name="age" min="1" max="120" step="1" required placeholder="数字">
+            </label>           
+        </div>
+        <div>
+            <label for="time" id="time">使用情况：
+                每天<input type="radio" name="time" value="day" id="time">
+                每周<input type="radio" name="time" value="week" id="time">
+                每月<input type="radio" name="time" value="month" id="time">
+                每年<input type="radio" name="time" value="year" id="time">
+            </label>
+        </div>
+        <div>
+            <label>您对我们的喜爱程度有<input type="range" name="score" value="1" min="1" max="100" step="1" id="rangeInput"><span id="scoreDisplay">1</span>分</label>
+        </div>
+        <div>
+            <label>您最喜欢我们的哪个网址：
+                <input type="url" name="url" required list="urllist" autofocus>
+            </label>
+            <datalist id="urllist">
+                <option value="https://1.com">产品介绍</option>
+                <option value="https://2.com">购物商城</option>
+                <option value="https://3.com">网站论坛</option>
+                <option value="https://4.com">网站首页</option>
+            </datalist>
+        </div>  
+        <div>  
+            <label for="feedbackType">反馈类型：
+                <select id="feedbackType" name="feedbackType" required>  
+                    <option value="productSuggestion">产品建议</option>  
+                    <option value="problemReport">问题报告</option>  
+                    <option value="experienceFeedback">体验反馈</option>  
+                    <option value="other">其他</option>  
+                </select> 
+            </label>  
+        </div>  
+        <div>  
+            <label for="description">问题描述/建议：
+                <textarea id="description" name="description" rows="4" required wrap="hard" placeholder="不超过500字"></textarea>
+            </label>               
+        </div>  
+        <div>  
+            <label for="contact">联系方式：
+                <input type="email" id="contact" name="contact" placeholder="请输入正确的号码" required>
+            </label>    
+        </div>  
+        <div>  
+            <label for="attachment">附件：
+                <input type="file" id="attachment" name="attachment" required>
+            </label>    
+        </div>  
+        <div>  
+            <button type="submit">提交</button>
+            <button type="reset>">重设</button>  
+        </div>  
+    </form>  
+    <div id="feedbackMessage"></div>  
+</div>  
+  
+<script>
+
+    /*使用JavaScript来监听input元素的input事件，并实时更新旁边的显示值,喜爱程度!*/
+    document.getElementById('rangeInput').addEventListener('input', function() {  
+    document.getElementById('scoreDisplay').textContent = this.value;  
+});
+
+    /*检查后使用!*/
+    document.getElementById('feedbackForm').addEventListener('submit'), function(event) {  
+    event.preventDefault(); // 阻止表单默认提交行为  
+    var feedbackType = document.getElementById('feedbackType').value;  
+    var description = document.getElementById('description').value;  
+    var contact = document.getElementById('contact').value;  
+    var attachment = document.getElementById('attachment').files[0];  
+    var formData = new FormData();  
+    }
+
+    formData.append('feedbackType', feedbackType);  
+    formData.append('description', description);  
+    formData.append('contact', contact);  
+    if (attachment) {  
+        formData.append('attachment', attachment);  
+    }  
+      
+    // 发送表单数据到服务器，这里只是一个示例，你需要替换成实际的API地址  
+    var xhr = new XMLHttpRequest();  
+    xhr.open('POST', '/submit-feedback', true); // 替换为你的服务器端点  
+    xhr.onload = function() {  
+        if (xhr.status === 200) {  
+            document.getElementById('feedbackMessage').textContent = '感谢您的反馈！';  
+            document.getElementById('feedbackMessage').className = 'success';  
+            // 清空表单字段  
+            document.getElementById('feedbackForm').reset();  
+        } else {  
+            document.getElementById('feedbackMessage').textContent = '提交反馈时出错，请稍后再试。';  
+            document.getElementById('feedbackMessage').className = 'error';  
+        }  
+    };  
+    xhr.send(formData);
+</script>  
+</body>  
+</html>
